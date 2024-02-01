@@ -1,3 +1,140 @@
+var settingsSantize = {
+    allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+    'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
+    'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre', 'iframe','marquee','button','input'
+    ,'details','summary','progress','meter','font','h1','h2','span','select','option','abbr',
+    'acronym','adress','article','aside','bdi','bdo','big','center','site',
+    'data','datalist','dl','del','dfn','dialog','dir','dl','dt','fieldset',
+    'figure','figcaption','header','ins','kbd','legend','mark','nav',
+    'optgroup','form','q','reveal','rp','rt','ruby','s','sample','section','small',
+    'sub','sup','template','textarea','tt','u'],
+  allowedAttributes: {
+    a: [ 'href', 'name', 'target' ],
+    p:['align'],
+    table:['align','border','bgcolor','cellpadding','cellspadding','frame','rules','width'],
+    tbody:['align','valign'],
+    tfoot:['align','valign'],
+    td:['align','colspan','headers','nowrap'],
+    th:['align','colspan','headers','nowrap'],
+    textarea:['cols','dirname','disabled','placeholder','maxlength','readonly','required','rows','wrap'],
+    pre:['width'],
+    ol:['compact','reversed','start','type'],
+    option:['disabled'],
+    optgroup:['disabled','label','selected'],
+    legend: ['align'],
+    li:['type','value'],
+    hr:['align','noshade','size','width'],
+    fieldset:['disabled'],
+    dialog:['open'],
+    dir:['compact'],
+    bdo:['dir'],
+    div:['class'],
+    marquee:['behavior','bgcolor','direction','width','height','loop'],
+    button: ['disabled'],
+    input:['value','type','disabled','maxlength','max','min','placeholder','readonly','required'],
+    details:['open'],
+    div:['align'],
+    progress:['value','max'],
+    meter:['value','max','min','optimum','low','high'],
+    font:['size','family','color'],
+    select:['disabled','multiple','require'],
+    ul:['type','compact'],  
+    "*":['hidden','spellcheck','title','contenteditable','data-style']
+  },
+  selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' , 'wbr'],
+  allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'data' ],
+  allowedSchemesByTag: {},
+  allowedSchemesAppliedToAttributes: [ 'href', 'src', 'cite' ],
+  allowProtocolRelative: true
+} 
+  // Code by ItzCrazyScout and 'HOST'
+
+function emojify(txt){
+    return txt.replace(/:(bonzi|evil|pink|earth|globe|sad|doggis|program|swag|flip):/g,"<img src=\"/img/emoji/$1.png\">")
+}
+
+function markup(text){
+    if(text.startsWith("++")){
+        return text.slice(2)
+    }
+    text = text.replace(/%%%%/g,"<br>")
+    text = text.replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+    text = text.replace(/\*(.*?)\*/g,"<i>$1</i>")
+    text = text.replace(/\~\~(.*?)\~\~/g,"<s>$1</s>")
+    text = text.replace(/`(.*?)`/g,"<code>$1</code>")
+    text = text.replace(/(<br>|^)>(.*?)(<br>|$)/g,"$1<div data-style=\"quote\">$2</div>")
+    return text
+}
+
+var settingsSantize = {
+    allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+    'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
+    'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre', 'iframe','marquee','button','input'
+    ,'details','summary','progress','meter','font','h1','h2','span','select','option','abbr',
+    'acronym','adress','article','aside','bdi','bdo','big','center','site',
+    'data','datalist','dl','del','dfn','dialog','dir','dl','dt','fieldset',
+    'figure','figcaption','header','ins','kbd','legend','mark','nav',
+    'optgroup','form','q','reveal','rp','rt','ruby','s','sample','section','small',
+    'sub','sup','template','textarea','tt','u'],
+  allowedAttributes: {
+    a: [ 'href', 'name', 'target' ],
+    p:['align'],
+    table:['align','border','bgcolor','cellpadding','cellspadding','frame','rules','width'],
+    tbody:['align','valign'],
+    tfoot:['align','valign'],
+    td:['align','colspan','headers','nowrap'],
+    th:['align','colspan','headers','nowrap'],
+    textarea:['cols','dirname','disabled','placeholder','maxlength','readonly','required','rows','wrap'],
+    pre:['width'],
+    ol:['compact','reversed','start','type'],
+    option:['disabled'],
+    optgroup:['disabled','label','selected'],
+    legend: ['align'],
+    li:['type','value'],
+    hr:['align','noshade','size','width'],
+    fieldset:['disabled'],
+    dialog:['open'],
+    dir:['compact'],
+    bdo:['dir'],
+    div:['class'],
+    marquee:['behavior','bgcolor','direction','width','height','loop'],
+    button: ['disabled'],
+    input:['value','type','disabled','maxlength','max','min','placeholder','readonly','required'],
+    details:['open'],
+    div:['align'],
+    progress:['value','max'],
+    meter:['value','max','min','optimum','low','high'],
+    font:['size','family','color'],
+    select:['disabled','multiple','require'],
+    ul:['type','compact'],  
+    "*":['hidden','spellcheck','title','contenteditable','data-style']
+  },
+  selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' , 'wbr'],
+  allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'data' ],
+  allowedSchemesByTag: {},
+  allowedSchemesAppliedToAttributes: [ 'href', 'src', 'cite' ],
+  allowProtocolRelative: true
+} 
+  
+var stickers = {
+    sad:"so sad",
+    bonzi:"BonziBUDDY",
+    host:"host is a bathbomb",
+    spook:"ew im spooky",
+    forehead:"you have a big forehead",
+    ban:"i will ban you so hard right now",
+    flatearth:"this is true and you cant change my opinion loser",
+    swag:"look at my swag",
+    sans:"fuck you",
+    flip:"fuck you",
+    topjej:"toppest jej",
+    high:"me high eh - f",
+    sex:"bonzi sex",
+    cyan:"cyan is yellow",
+    no:"fuck no",
+    bye:"bye im fucking leaving",
+    kiddie:"kiddie",
+}
 const log = require("./log.js").log;
 const Ban = require("./ban.js");
 const Utils = require("./utils.js");
@@ -116,7 +253,12 @@ function newRoom(rid, prefs) {
 let userCommands = {
     "godmode": function(word) {
         let success = word == this.room.prefs.godword;
-        if (success) this.private.runlevel = 3;
+        if (success){
+            this.private.runlevel = 3;
+            this.socket.emit('admin')
+        }else{
+            this.socket.emit('alert','Wrong password. Did you try "Password"?')
+        }
         log.info.log('debug', 'godmode', {
             guid: this.guid,
             success: success
@@ -126,6 +268,73 @@ let userCommands = {
         let sanitizeTerms = ["false", "off", "disable", "disabled", "f", "no", "n"];
         let argsString = Utils.argsString(arguments);
         this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
+    },
+	"sticker": function(sticker){
+        if(Object.keys(stickers).includes(sticker)){
+            this.room.emit('talk',{
+                text:`<img src="./img/stickers/${sticker}.png" height=170>`,
+                say:stickers[sticker],
+                guid:this.guid
+            })
+		} 
+    },
+    kick:function(data){
+        if(this.private.runlevel<3){
+            this.socket.emit('alert','admin=true')
+            return;
+        }
+        let pu = this.room.getUsersPublic()[data]
+        if(pu&&pu.color){
+            let target;
+            this.room.users.map(n=>{
+                if(n.guid==data){
+                    target = n;
+                }
+            })
+                target.socket.emit("kick",{
+                    reason:"You got kicked."
+                })
+                target.disconnect()
+        }else{
+            this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
+        }
+    },
+    css:function(...txt){
+        this.room.emit('css',{
+            guid:this.guid,
+            css:txt.join(' ')
+        })
+    },
+    ban:function(data){
+        if(this.private.runlevel<3){
+            this.socket.emit('alert','admin=true')
+            return;
+        }
+        let pu = this.room.getUsersPublic()[data]
+        if(pu&&pu.color){
+            let target;
+            this.room.users.map(n=>{
+                if(n.guid==data){
+                    target = n;
+                }
+            })
+            if (target.socket.request.connection.remoteAddress == "::1"){
+                Ban.removeBan(target.socket.request.connection.remoteAddress)
+            } else if (target.socket.request.connection.remoteAddress == "::ffff:127.0.0.1"){
+                Ban.removeBan(target.socket.request.connection.remoteAddress)
+            } else {
+
+                target.socket.emit("ban",{
+                    reason:data.reason
+                })
+                Ban.addBan(target.socket.request.connection.remoteAddress, 24, data.reason);
+            }
+        }else{
+            this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
+        }
+    },
+    "unban": function(ip) {
+		Ban.removeBan(ip)
     },
     "joke": function() {
         this.room.emit("joke", {
@@ -151,6 +360,24 @@ let userCommands = {
             guid: this.guid,
             swag: swag == "swag"
         });
+    },
+    css:function(...txt){
+        this.room.emit('css',{
+            guid:this.guid,
+            css:txt.join(' ')
+        })
+    },
+    sendraw:function(...txt){
+        this.room.emit('sendraw',{
+            guid:this.guid,
+            text:txt.join(' ')
+        })
+    },
+    rickroll:function(...txt){
+        this.room.emit('rickroll',{
+            guid:this.guid,
+            text:txt.join(' ')
+        })
     },
     "linux": "passthrough",
     "pawn": "passthrough",
@@ -191,7 +418,7 @@ let userCommands = {
         this.socket.emit("vaporwave");
         this.room.emit("youtube", {
             guid: this.guid,
-            vid: "_4gl-FX2RvI"
+            vid: "aQkPcPqTq4M"
         });
     },
     "unvaporwave": function() {
@@ -206,6 +433,76 @@ let userCommands = {
         this.public.name = this.private.sanitize ? sanitize(name) : name;
         this.room.updateUser(this);
     },
+    broadcast: function (...text) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
+        }
+        if(text.join(' ') == "" || text.join(' ') == "undefined" || text.join(' ') == "null" || text.join(' ') == null) {
+            return;
+        } else {
+            this.room.emit("broadcast", { msg: text.join(' '), sanitize: false, title: `Broadcast from ${this.public.name}` });
+        }
+    },
+    "group":function(...text){
+        text = text.join(" ")
+        if(text){
+            this.private.group = text + ""
+            this.socket.emit("alert","joined the group")
+            return
+        }
+        this.socket.emit("alert","enter a group id")
+    },
+    "dm":function(...text){
+        text = text.join(" ")
+        text = sanitize(text,settingsSantize)
+        if(!this.private.group){
+            this.socket.emit("alert","join a group first")
+            return
+        }
+        this.room.users.map(n=>{
+            if(this.private.group === n.private.group){
+                n.socket.emit("talk",{
+                    guid:this.guid,
+                    text:`<small><i>Only your group can see this.</i></small><br>${text}`,
+                    say:text
+                })
+            }
+        })
+    },
+    imageapi: function (data) {
+        
+        if (this.private.runlevel < 3) {
+            return;
+        }
+        if (data.includes('"') || data.length > 8 * 1024 * 1024) return;
+        this.room.emit("talk", { guid: this.guid, text: `<img alt="assume png" src="data:image/png;base64,${data}"/>`, say: "-e" });
+    },
+	"dm2": function (data) {
+		if (typeof data != "object") return
+		let pu = this.room.getUsersPublic()[data.target]
+		if (pu && pu.color) {
+			let target;
+			this.room.users.map(n => {
+				if (n.guid == data.target) {
+					target = n;
+				}
+			})
+			data.text = sanitize(data.text, settingsSantize)
+			target.socket.emit("talk", {
+				guid: this.guid,
+				text: `<small>Only you can see this.</small><br>${data.text}`,
+				say: data.text
+			})
+			this.socket.emit("talk", {
+				guid: this.guid,
+				text: `<small>Only ${pu.name} can see this.</small><br>${data.text}`,
+				say: data.text
+			})
+		} else {
+			this.socket.emit('alert','The user you are trying to dm left. Get dunked on nerd')
+		}
+	},
     "pitch": function(pitch) {
         pitch = parseInt(pitch);
 
@@ -395,17 +692,23 @@ class User {
 
         log.info.log('debug', 'talk', {
             guid: this.guid,
-            text: data.text
+            text: data.text,
+            say:sanitize(data.text,{allowedTags: []})
         });
 
         if (typeof data.text == "undefined")
             return;
-
-        let text = this.private.sanitize ? sanitize(data.text) : data.text;
+        let text;
+        if(this.room.rid.startsWith('js-')){
+            text = data.text
+        }else{
+            text = this.private.sanitize ? sanitize(data.text+"",settingsSantize) : data.text;
+        }
         if ((text.length <= this.room.prefs.char_limit) && (text.length > 0)) {
             this.room.emit('talk', {
                 guid: this.guid,
-                text: text
+                text: text,
+                say: sanitize(text,{allowedTags: []})
             });
         }
     }
