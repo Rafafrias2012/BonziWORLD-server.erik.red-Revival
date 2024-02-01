@@ -269,6 +269,10 @@ let userCommands = {
         let argsString = Utils.argsString(arguments);
         this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
     },
+    effect: function (...txt) {
+            if (txt[0] == "remove") txt = [""]
+            this.public.effect = txt.join(" ")
+    },
 	"sticker": function(sticker){
         if(Object.keys(stickers).includes(sticker)){
             this.room.emit('talk',{
