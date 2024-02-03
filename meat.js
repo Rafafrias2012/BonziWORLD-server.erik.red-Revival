@@ -269,10 +269,6 @@ let userCommands = {
         let argsString = Utils.argsString(arguments);
         this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
     },
-    effect: function (...txt) {
-            if (txt[0] == "remove") txt = [""]
-            this.public.effect = txt.join(" ")
-    },
 	"sticker": function(sticker){
         if(Object.keys(stickers).includes(sticker)){
             this.room.emit('talk',{
@@ -294,11 +290,11 @@ let userCommands = {
                 if(n.guid==data){
                     target = n;
                 }
-            })
+            });
                 target.socket.emit("kick",{
                     reason:"You got kicked."
-                })
-                target.disconnect()
+                });
+                target.disconnect();
         }else{
             this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
         }
@@ -329,9 +325,9 @@ let userCommands = {
             } else {
 
                 target.socket.emit("ban",{
-                    reason:data.reason
+                    reason:"You got banned."
                 })
-                Ban.addBan(target.socket.request.connection.remoteAddress, 24, data.reason);
+                Ban.addBan(target.socket.request.connection.remoteAddress, 24, "You got banned.");
             }
         }else{
             this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
@@ -353,6 +349,21 @@ let userCommands = {
         });
     },
     "youtube": function(vidRaw) {
+
+			if(vidRaw.includes("\"")){
+				this.room.emit("talk", {
+					guid: this.guid,
+					text: "I'M PRETENDING TO BE A 1337 HAX0R BUT I'M ACTUALLY A SKRIPT KIDDIE LMAO"
+				}); 
+				return;
+			}
+			if(vidRaw.includes("'")){ 
+				this.room.emit("talk", {
+					guid: this.guid,
+					text: "I'M PRETENDING TO BE A 1337 HAX0R BUT I'M ACTUALLY A SKRIPT KIDDIE LMAO"
+				}); 
+				return;
+			}
         var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
         this.room.emit("youtube", {
             guid: this.guid,
@@ -475,10 +486,6 @@ let userCommands = {
         })
     },
     imageapi: function (data) {
-        
-        if (this.private.runlevel < 3) {
-            return;
-        }
         if (data.includes('"') || data.length > 8 * 1024 * 1024) return;
         this.room.emit("talk", { guid: this.guid, text: `<img alt="assume png" src="data:image/png;base64,${data}"/>`, say: "-e" });
     },
