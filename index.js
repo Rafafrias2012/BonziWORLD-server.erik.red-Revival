@@ -58,8 +58,8 @@ Ban.init();
 // Start actually listening
 server.listen(port, function () {
 	console.log(
-		"\n",
-		"Server domain: localhost\n",
+		"Welcome to BonziWORLD!\n",
+		"Time to meme!\n",
 		"------------------------\n",
 		"Server listening on port: " + port
 	);
